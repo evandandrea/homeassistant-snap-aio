@@ -1,0 +1,26 @@
+name: homeassistant-snap-aio
+version: '0.1'
+summary: A snap implementation of the Home Assistant AiO
+description: |
+  A snap implementation of Home Assistant, including OpenZwave, OpenZwave Control Panel, Mosquitto. This is a port of the fabric based AiO found within Home Assistant
+grade: devel
+confinement: strict
+
+
+apps:
+  hassium-aio:
+    command: hass --daemon --config $SNAP_USER_DATA
+    daemon: simple
+    restart-condition: always
+    plugs: 
+      - network
+      - network-bind
+
+
+parts:
+  homeassistant:
+    plugin: python
+    source: https://github.com/home-assistant/home-assistant.git
+    source-type: git
+    source-branch: master
+    python-version: python3
